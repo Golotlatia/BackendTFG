@@ -13,7 +13,7 @@ const getToken = (req, res) => {
     let token = jwt.sign(javi, process.env.PRIVATEKEY);
 
     
-    res.send({
+    res.status(200).send({
         'token':token});
 
     console.log("Token enviado");
@@ -22,22 +22,36 @@ const getToken = (req, res) => {
 const verifyToken = (req, res) => {
 
     console.log('recibido petición de verifiacion de token');
+
+    
     const tokenReceived = req.header('auth-token');
-    console.log(tokenReceived);
-    let tokenDecoded    
+
+    if(tokenReceived){
+        console.log(tokenReceived);
+        let tokenDecoded    
   
         try{
             tokenDecoded = jwt.verify(tokenReceived, process.env.PRIVATEKEY);
+            if (tokenDecoded){
+                res.status(200).send({
+                    'respuesta': 'true'});
+            }
 
         } catch(error){
             if(error!=undefined){
-                //res.status(401).send('Error - Token Inválido');
-                res.send(true);
+                res.send({
+                    'respuesta': 'Error - Token Inválido'});
+                
             }
 
-        }      
-        console.log(tokenDecoded);
-        res.send(true);
+        }
+
+    }else{
+        res.send({
+            'respuesta': 'No hay token'});
+    }
+          
+       
    
   
     
