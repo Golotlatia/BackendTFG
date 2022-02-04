@@ -1,7 +1,6 @@
 require('dotenv').config()
 
-console.log("hola mundo");
-
+console.log("Server Started");
 const Server = require('./models/server.js');
 
 const server = new Server();

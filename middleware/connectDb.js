@@ -1,7 +1,11 @@
-const { MongoClient } = require('mongodb');
+/*const { MongoClient } = require('mongodb');
 
 
-async function connectDb() {
+let dbConnection;
+
+module.exports = {
+
+  connectToServer: function() {
     // Database Name
   dbName = 'myProject';
  
@@ -11,6 +15,7 @@ async function connectDb() {
   console.log('Connected successfully to server');
    db = client.db(dbName);
    collection = db.collection('documents');
+}
 }
 
 async  function insertarDb(){
@@ -24,4 +29,4 @@ console.log('Inserted documents =>', insertResult);
 
 exports.connectDb = connectDb;
 
-exports.insertarDb = insertarDb;
+exports.insertarDb = insertarDb;*/

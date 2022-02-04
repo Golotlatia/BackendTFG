@@ -8,6 +8,11 @@ const getC = (req, res) => {
     res.send('Hola desde Get del user')
 }
 
+const addTimer = (req, res) => {
+    console.log("He llegado hasta el addTimer");
+    res.send('Hola desde el addTimer del REST')
+}
+
 
 const postC = (req, res) => {
     //console.log(req.body);
@@ -25,6 +30,7 @@ const patchC  = (req, res) => {
 }
 
 module.exports = {
+    addTimer,
     getC,
     postC,
     deleteC,

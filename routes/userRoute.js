@@ -10,6 +10,8 @@ const userController = require("../controller/userController")
 
 const router = Router();
 
+
+
 router.get('/user', userController.getC );
 
 router.post('/user', authGuard, timersDb,  userController.postC);

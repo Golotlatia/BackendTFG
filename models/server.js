@@ -8,7 +8,7 @@ const restRoutes = require('../routes/REST');
 const userRoutes = require('../routes/userRoute');
 const authRoutes = require('../routes/authRoute');
 
-const connectDb = require("../middleware/connectDb");
+const connectDb = require("../middleware/connectionDB");
 
 const  MongoStore = require('connect-mongo');
 
@@ -16,10 +16,20 @@ class Server {
   constructor () {
 
     this.rest='/';
-    this.app = express()
+    this.app = express();
     this.app.use(cors());
-    this.routes()
-    connectDb.connectDb();
+    this.routes();
+
+
+    
+
+
+    connectDb.connectToServer(function (err) {    //Creamos la conexion a la base de datos
+      if (err) {
+        console.error(err);
+        process.exit();
+      }
+    });
     
   }
 
@@ -60,6 +70,7 @@ class Server {
     })
 
     this.app.use(express.json()); //Esto es para parsear en body como JSON
+    this.app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencodeds
     this.app.use(this.rest, restRoutes);
     this.app.use(this.rest, authRoutes );
     this.app.use(this.rest, userRoutes);
