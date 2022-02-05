@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const authGuard = require("../middleware/authGuard");
-const timersDb= require("../middleware/timersDb");
+
 
 
 
@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/user', userController.getC );
 
-router.post('/user', authGuard, timersDb,  userController.postC);
+
 
 router.delete('/user', userController.deleteC);
 

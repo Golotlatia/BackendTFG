@@ -8,7 +8,7 @@ router.post('/addTimer', restController.addTimer );
 
 //router.post('/', restController.postC);
 
-router.delete('/', restController.deleteC);
+router.post('/deleteTimer', restController.deleteTimer);
 
 router.patch('/', restController.patchC);
 

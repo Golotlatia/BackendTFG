@@ -1,5 +1,5 @@
 
-
+var mongodb = require('mongodb');
 
 
 const dbo = require("../middleware/connectionDB");
@@ -27,8 +27,21 @@ const postC = (req, res) => {
     res.send('Hola desde Post del REST')
 }
 
-const deleteC = (req, res) => {
-    res.send('Hola desde Delete del REST')
+async function deleteTimer  (req, res)  {
+    
+  console.log('El temporizador recibido es: ' + JSON.stringify(req.body));
+  
+
+  const dbConnect = dbo.getDb();
+
+  const  dbresult =  await dbConnect
+    .collection("documents")
+    .deleteOne({"_id": new mongodb.ObjectID(req.body._id)});
+    
+    
+    console.log("La respuesta del servidor es: " +  JSON.stringify(dbresult));
+
+    res.send(dbresult)
 }
 
 const patchC  = (req, res) => {
@@ -58,7 +71,8 @@ module.exports = {
     read,
     addTimer,
     postC,
-    deleteC,
-    patchC
+    deleteTimer,
+    
+    patchC,
 
 }
